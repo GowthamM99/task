@@ -21,15 +21,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeController {
 	private final EmployeeService employeeService;
-	
+
 	@PostMapping(path = "/add")
-	public ResponseEntity<SuccessResponse<String>> addDataFromExcelToDatabase( @RequestParam("file") MultipartFile file) throws IOException {
-		
-		if(Helper.checkExcelFromat(file)) {
-		  if(employeeService.addDataFromExcelToDatabase(file)) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.<String>builder().data("success").message("data added succesfully to database from excel").build());
-		  }
-		 }
-		 return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.<String>builder().data("fail").message("failed to add the data").build());
+	public ResponseEntity<SuccessResponse<String>> addDataFromExcelToDatabase(@RequestParam("file") MultipartFile file)
+			throws IOException {
+		if (Helper.checkExcelFromat(file)) {
+			if (employeeService.addDataFromExcelToDatabase(file)) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.<String>builder().data("success")
+						.message("data added succesfully to database from excel").build());
+			}
+		}
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(SuccessResponse.<String>builder().data("fail").message("failed to add the data").build());
 	}
 }
