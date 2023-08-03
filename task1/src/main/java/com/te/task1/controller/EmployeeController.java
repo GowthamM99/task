@@ -26,7 +26,7 @@ public class EmployeeController {
 	public ResponseEntity<SuccessResponse<String>> addDataFromExcelToDatabase( @RequestParam("file") MultipartFile file) throws IOException {
 		
 		if(Helper.checkExcelFromat(file)) {
-		  if(employeeService.addDataFromExcelToDatabase(file.getInputStream())) {
+		  if(employeeService.addDataFromExcelToDatabase(file)) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.<String>builder().data("success").message("data added succesfully to database from excel").build());
 		  }
 		 }

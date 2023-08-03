@@ -1,9 +1,9 @@
 package com.te.task1.service;
 
-import java.io.InputStream;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface EmployeeService {
 
-	boolean addDataFromExcelToDatabase(InputStream inputStream);
+	boolean addDataFromExcelToDatabase(MultipartFile file);
 
 }
